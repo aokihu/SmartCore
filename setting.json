@@ -1,0 +1,9 @@
+{
+  "Mode":"dev",
+  "dist":{
+    "mqtt_server":"mqtt://localhost"
+  },
+  "dev":{
+    "mqtt_server":"mqtt://localhost"
+  }
+}

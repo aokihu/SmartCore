@@ -1,0 +1,24 @@
+{
+  "name": "smartcore",
+  "version": "1.0.0",
+  "description": "智能设备控制中心",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aokihu/SmartCore.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aokihu/SmartCore/issues"
+  },
+  "homepage": "https://github.com/aokihu/SmartCore",
+  "dependencies": {
+    "lodash": "^3.10.1",
+    "mqtt": "^1.5.0",
+    "mqtt-regex": "^1.0.4"
+  }
+}
