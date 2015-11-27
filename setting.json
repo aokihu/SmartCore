@@ -2,10 +2,12 @@
   "Mode":"dist",
   "dist":{
     "mqtt_server":"mqtt://192.168.1.113",
-    "music_path":"music"
+    "music_path":"music",
+    "schedule_file":"data/schedule.json"
   },
   "dev":{
     "mqtt_server":"mqtt://localhost",
-    "music_path":"music"
+    "music_path":"music",
+    "schedule_file":"data/schedule.json"
   }
 }

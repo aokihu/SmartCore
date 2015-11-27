@@ -14,7 +14,7 @@ var mqtt = require('mqtt')
     Setting = require('../setting.json')
 
 var client = mqtt.connect(Setting[Setting.Mode].mqtt_server);
-var timer = new Timer();
+var timer = new Timer(Setting[Setting.Mode].schedule_file);
 
 timer.on('timeout', function(evt){
 
