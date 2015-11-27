@@ -9,9 +9,8 @@
  * }
  */
 
-
 var mqtt = require('mqtt')
-    Timer = require('../Modules/Timer.js')
+    Timer = require('../modules/Timer.js')
     Setting = require('../setting.json')
 
 var client = mqtt.connect(Setting[Setting.Mode].mqtt_server);
@@ -21,10 +20,12 @@ timer.on('timeout', function(evt){
 
   switch (evt.action) {
     case "play single":
-      client.publish('/local/music/play/single', evt.data);
+      console.log('play music');
+      client.publish('/local/music/play/single', JSON.stringify({file:evt.data}));
       break;
     case "play playlist":
-      client.publish('/local/music/play/playlist', evt.data);
+      console.log('play playlist');
+      client.publish('/local/music/play/playlist', JSON.stringify({file:evt.data}));
       break;
     default:
   }
@@ -32,9 +33,10 @@ timer.on('timeout', function(evt){
 });
 
 client.on('connect', function(){
+  client.subscribe('/local/timer/start');
   client.publish('/local/timer/start', 'Hello mqtt');
 })
 
 client.on('message', function(topic, msg){
-
+  console.log(topic.toString());
 })

@@ -1,10 +1,12 @@
 var mqtt = require('mqtt'),
     mqtt_regex = require("mqtt-regex"),
-    MusicPlayer = require('../Modules/MusicPlayer.js'),
+    // MusicPlayer = require('../Modules/MusicPlayer.js'),
+    // MusicPlayer = require('../Modules/player.js'),
+    MusicPlayer = require('mplayer'),
     _ = require('lodash')
     Setting = require('../setting.json')
 
-var musicPlayer = new MusicPlayer();
+var musicPlayer = new MusicPlayer({verbose: false,debug: false});
 var client = mqtt.connect(Setting[Setting.Mode].mqtt_server);
 
 // 消息处理
@@ -31,6 +33,7 @@ client.on('message', function(topic,msg){
 
   var params = musicPlayerInfo(topic.toString());
 
+
   if(params && params.action){
     switch (params.action) {
       case 'next':
@@ -48,10 +51,12 @@ client.on('message', function(topic,msg){
       case 'play':
         // 分别处理单曲和播放列表
         if(params.playMode[0] == 'single'){
-          musicPlayer.playSingle();
+          var msg =  msg ? JSON.parse(msg.toString()) : null;
+          musicPlayer.openFile(msg.file);
         }
         if(params.playMode[0] == 'playlist'){
-          musicPlayer.playPlaylist();
+          var msg =  msg ? JSON.parse(msg.toString()) : null;
+          musicPlayer.openPlaylist(msg.file);
         }
         console.log('music play');
         break;

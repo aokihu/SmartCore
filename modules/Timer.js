@@ -25,7 +25,7 @@ var TimerService = function(){
 
   self.schedule = {
     0:{},
-    1:{11:{37:{0:[{"action":"play single","data":"playlist.m3u"}]}}, 12:{16:{5:[{"action":"play playlist","data":null}]}}},
+    1:{},
     2:{},
     3:{},
     4:{},
@@ -38,8 +38,8 @@ var TimerService = function(){
    * 加载时刻表的内容
    * @return {[type]} [description]
    */
-  self.loadSchedule = function(){
-
+  self.loadSchedule = function(scheduleFile){
+    
   }
 
   /**

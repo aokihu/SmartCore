@@ -1,9 +1,11 @@
 {
-  "Mode":"dev",
+  "Mode":"dist",
   "dist":{
-    "mqtt_server":"mqtt://localhost"
+    "mqtt_server":"mqtt://192.168.1.113",
+    "music_path":"music"
   },
   "dev":{
-    "mqtt_server":"mqtt://localhost"
+    "mqtt_server":"mqtt://localhost",
+    "music_path":"music"
   }
 }
