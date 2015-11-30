@@ -3,6 +3,7 @@ var events = require("events"),
     util = require("util"),
     fs = require('fs'),
     later = require('later'),
+    UUID = require('uuid'),
     _ = require('lodash');
 
 class Timer extends events.EventEmitter{
@@ -11,7 +12,7 @@ class Timer extends events.EventEmitter{
     super();
 
     this.timers = [];
-    this.schedule = null;
+    this.schedule = [];
 
   }
 
@@ -79,6 +80,21 @@ class Timer extends events.EventEmitter{
    */
   add(task){
 
+    let _task = {
+      id:UUID.v4(),
+      wd:[],
+      h:0,
+      m:0,
+      s:0,
+      action:"",
+      data:"",
+      comment:""
+    }
+
+    _.assign(_task, task);
+
+    this.schedule.push(_task);
+
   }
 
   /**
@@ -87,6 +103,31 @@ class Timer extends events.EventEmitter{
    * @return {[type]}        [description]
    */
   remove(taskId){
+
+    let pos = this.schedule.findeIndex((task) => {
+      return task.id === taskID
+    });
+
+    if(pos > -1){
+      this.schedule.splice(pos, 1);
+    }
+
+  }
+
+  /**
+   * 保存数据
+   * @return {[type]} [description]
+   */
+  save(){
+
+    // 1. 检查数据文件是否存在
+    // 2. 如果没有，那么就保存到当前app根目录下
+    let jsonData = JSON.stringify(this.schedule);
+
+    fs.writeFile(this.dataFile, jsonData, (err) => {
+      if (err) throw err;
+      console.error(err);
+    });
 
   }
 
