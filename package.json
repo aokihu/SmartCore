@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/aokihu/SmartCore",
   "dependencies": {
+    "later": "^1.2.0",
     "lodash": "^3.10.1",
     "mplayer": "^2.0.0",
     "mqtt": "^1.5.0",

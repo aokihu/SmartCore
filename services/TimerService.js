@@ -9,17 +9,22 @@
  * }
  */
 
-var mqtt = require('mqtt')
-    Timer = require('../modules/Timer.js')
+var mqtt = require('mqtt'),
+    mqtt-regex = require('mqtt-regex'),
+    Timer = require('../modules/Timer.js'),
     Setting = require('../setting.json')
 
 var client = mqtt.connect(Setting[Setting.Mode].mqtt_server);
-var timer = new Timer(Setting[Setting.Mode].schedule_file);
+
+/* 计时器配置 */
+var timer = new Timer();
+timer.load(process.cwd()+Setting[Setting.Mode].schedule_file);
+timer.start();
 
 timer.on('timeout', function(evt){
 
   switch (evt.action) {
-    case "play single":
+    case "play music":
       console.log('play music');
       client.publish('/local/music/play/single', JSON.stringify({file:evt.data}));
       break;
@@ -35,8 +40,18 @@ timer.on('timeout', function(evt){
 client.on('connect', function(){
   client.subscribe('/local/timer/start');
   client.publish('/local/timer/start', 'Hello mqtt');
+
+  client.subscribe('get/local/timer/schedule');
 })
 
 client.on('message', function(topic, msg){
-  console.log(topic.toString());
+
+  let topic = topic.toString();
+
+  switch (topic):
+    case 'get/local/timer/schedule':
+    default:
+      client.publish('/local/timer/schedule', JSON.stringify(timer.schedule));
+    break;
+
 })

@@ -1,0 +1,32 @@
+[
+  {
+    "id":1234,
+    "dw":[1,2,3,4,5,6,7],
+    "h":13,
+    "m":56,
+    "s":0,
+    "action":"play playlist",
+    "data":"/home/orangepi/p.m3u",
+    "comment":""
+  },
+  {
+    "id":234,
+    "dw":[1,2,3,4,5,6,7],
+    "h":16,
+    "m":25,
+    "s":0,
+    "action":"play playlist",
+    "data":"/home/orangepi/p.m3u",
+    "comment":""
+  },
+  {
+    "id":443,
+    "dw":[1,2,3,4,5,6,7],
+    "h":16,
+    "m":30,
+    "s":0,
+    "action":"play playlist",
+    "data":"/home/orangepi/p.m3u",
+    "comment":""
+  }
+]
