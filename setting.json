@@ -9,5 +9,13 @@
     "mqtt_server":"mqtt://localhost",
     "music_path":"music",
     "schedule_file":"/../data/schedule.json"
+  },
+  "software":{
+    "version":"1.0.0"
+  },
+  "hardware":{
+    "model":"Smart One",
+    "platform":"OPC",
+    "version":"1.0.0"
   }
 }
