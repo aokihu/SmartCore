@@ -4,7 +4,8 @@
   "description": "智能设备控制中心",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start":"node services/MQTTService.js;"
   },
   "repository": {
     "type": "git",
@@ -19,6 +20,7 @@
   "dependencies": {
     "later": "^1.2.0",
     "lodash": "^3.10.1",
+    "mosca": "^0.32.1",
     "mplayer": "^2.0.0",
     "mqtt": "^1.5.0",
     "mqtt-regex": "^1.0.4",

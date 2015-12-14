@@ -1,3 +1,4 @@
+'use strict';
 /**
  * 计时器服务单元
  * @description 提供一个定时服务，当到达指定时间后执行特定的任务
@@ -10,7 +11,6 @@
  */
 
 var mqtt = require('mqtt'),
-    mqtt-regex = require('mqtt-regex'),
     Timer = require('../modules/Timer.js'),
     Setting = require('../setting.json')
 
@@ -42,16 +42,15 @@ client.on('connect', function(){
   client.publish('/local/timer/start', 'Hello mqtt');
 
   client.subscribe('get/local/timer/schedule');
-})
+});
 
-client.on('message', function(topic, msg){
+client.on('message', (topic, msg) =>{
+  let _topic = topic.toString();
 
-  let topic = topic.toString();
-
-  switch (topic):
+  switch (_topic){
     case 'get/local/timer/schedule':
     default:
       client.publish('/local/timer/schedule', JSON.stringify(timer.schedule));
     break;
-
-})
+  }
+});

@@ -131,10 +131,6 @@ class Timer extends events.EventEmitter{
 
   }
 
-  get schedule(){
-    return this.schedule;
-  }
-
 }
 
 module.exports = Timer;

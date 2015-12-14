@@ -1,5 +1,5 @@
 {
-  "Mode":"dist",
+  "Mode":"dev",
   "dist":{
     "mqtt_server":"mqtt://192.168.1.113",
     "music_path":"music",
@@ -14,7 +14,7 @@
     "version":"1.0.0"
   },
   "hardware":{
-    "model":"Smart One",
+    "model":"Smart-1000",
     "platform":"OPC",
     "version":"1.0.0"
   }
