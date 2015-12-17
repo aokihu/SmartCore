@@ -18,7 +18,7 @@ var client = mqtt.connect(Setting[Setting.Mode].mqtt_server);
 
 /* 计时器配置 */
 var timer = new Timer();
-timer.load(process.cwd()+Setting[Setting.Mode].schedule_file);
+timer.load(process.cwd()+Setting.data.schedule_file);
 timer.start();
 
 timer.on('timeout', function(evt){
