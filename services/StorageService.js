@@ -17,19 +17,18 @@ const dbInfo  =  mqtt_regex(pattern).exec;
 
 var client = mqtt.connect(Setting[Setting.Mode].mqtt_server);
 
-
+// @event connect
 client.on('connect', () => {
 
   // 设置监听事件
   client.subscribe(prefix);
   console.log('connect server');
 
-
 });
 
 client.on('message', (topic, msg) => {
 
-  let ({db, method} = dbInfo(topic.toString()));
+  let params = dbInfo(topic.toString());
   let _data  = msg.toString() ? JSON.parse(msg.toString()) : null;
 
   console.log(params);

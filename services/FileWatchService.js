@@ -76,7 +76,7 @@ fs.watch(MusicLibrary, (evt, filename) => {
     //
     // 发送mqtt消息
     //
-    client.publish(`${publishPrefix.file}${action}`, JSON.stringify(fileData));
+    client.publish(`/local/storage/music/add`, JSON.stringify(fileData));
   })
 
 });

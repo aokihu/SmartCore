@@ -2,7 +2,7 @@
   "name": "smartcore",
   "version": "1.0.0",
   "description": "智能设备控制中心",
-  "main": "app.js",
+  "main": "maina.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start":"node services/MQTTService.js;"
