@@ -12,9 +12,13 @@
 
 var mqtt = require('mqtt'),
     Timer = require('../modules/Timer.js'),
-    Setting = require('../setting.json')
+    Setting = require('../setting.json'),
+    action = require('../action.js')
 
 var client = mqtt.connect(Setting[Setting.Mode].mqtt_server);
+
+const setActions = action.flat(action.timer.set);
+const getActions = action.flat(action.timer.get);
 
 /* 计时器配置 */
 var timer = new Timer();
@@ -26,22 +30,22 @@ timer.on('timeout', function(evt){
   switch (evt.action) {
     case "play music":
       console.log('play music');
-      client.publish('/local/music/play/single', JSON.stringify({file:evt.data}));
+      client.publish('/local/music/set/play/single', JSON.stringify({file:evt.data}));
       break;
     case "play playlist":
       console.log('play playlist');
-      client.publish('/local/music/play/playlist', JSON.stringify({file:evt.data}));
+      client.publish('/local/music/set/play/playlist', JSON.stringify({file:evt.data}));
       break;
     default:
   }
 
 });
 
-client.on('connect', function(){
-  client.subscribe('/local/timer/start');
-  client.publish('/local/timer/start', 'Hello mqtt');
+client.on('connect', ()=>{
+  // 订阅关注消息
+  setActions.forEach(act => client.subscribe(`${action.timer.prefix}/set${act}`));
+  getActions.forEach(act => client.subscribe(`${action.timer.prefix}/get${act}`));
 
-  client.subscribe('get/local/timer/schedule');
 });
 
 client.on('message', (topic, msg) =>{

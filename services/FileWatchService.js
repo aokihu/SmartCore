@@ -8,20 +8,7 @@ const Setting = require('../setting.json');
 const fs = require('fs');
 const StringDecoder = require('string_decoder').StringDecoder;
 const mqtt = require('mqtt');
-
-
-// MQTT 消息定义
-const publishPrefix = {
-  'file':'/local/file'
-}
-
-const publishAction = {
-  'music':{
-    'add':'/add/music',       // 添加文件
-    'remove':'/remove/music', // 删除文件
-    'delete':'/remove/music'  // 删除文件
-  }
-}
+const action = require('../action.js');
 
 // 字符解码器
 var decoder = new StringDecoder('utf8');
@@ -57,7 +44,8 @@ fs.watch(MusicLibrary, (evt, filename) => {
     //
     if(err && err.errno == -2){
       console.log(`remove file ${realFilename}`);
-      action = publishAction.music.add;
+      action = '/local/db/remove/music';
+      client.publish(action, JSON.stringify(fileData));
     }
     else if(evt !== 'change'){
 
@@ -67,16 +55,13 @@ fs.watch(MusicLibrary, (evt, filename) => {
       //
 
       console.log(`add file ${realFilename}`);
-      action = publishAction.music.remove;
+      action = '/local/db/add/music';
+      client.publish(action, JSON.stringify(fileData));
     }
     else {
       return false;
     }
 
-    //
-    // 发送mqtt消息
-    //
-    client.publish(`/local/storage/music/add`, JSON.stringify(fileData));
   })
 
 });

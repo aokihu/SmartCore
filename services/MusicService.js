@@ -3,6 +3,7 @@
 var mqtt = require('mqtt'),
     mqtt_regex = require("mqtt-regex"),
     MusicPlayer = require('mplayer'),
+    action = require('../action.js'),
     _ = require('lodash'),
     Setting = require('../setting.json')
 
@@ -17,32 +18,12 @@ var client = mqtt.connect(Setting[Setting.Mode].mqtt_server);
 // get 是双向传输信号,数据又可能是由其它服务返回
 //
 
-const prefix = '/local/music/#';
+// const prefix = '/local/music/#';
+const prefix = action.music.prefix;
 
-const setActions = [
-  '/play/playlist',
-  '/play/single',
-  '/stop',
-  '/next',
-  '/prev',
-  '/vol_up',
-  '/vol_down',
-  '/vol_set'
-];
+const setActions = action.flat(action.music.set);
+const getActions = action.flat(action.music.get);
 
-const getActions= [
-  '/status',
-  '/library',
-  '/playlist'
-];
-
-//
-// 广播事件定义
-//
-const publishPrefix = {
-  'music':'/local/music',
-  'storage':'/local/storage'
-}
 
 // 消息模式注册
 var pattern = "/local/music/+method/+action/#playMode";
@@ -50,7 +31,7 @@ var musicPlayerInfo = mqtt_regex(pattern).exec;
 
 // 监听播放器事件
 // @event stop
-musicPlayer.on('stop', (status)=>client.publish(`${publishPrefix.music}/get${publishAction.music.status}`, JSON.stringify({status:'idle'})))
+// musicPlayer.on('stop', (status)=>client.publish(`/local/music/pub/status`, JSON.stringify({status:'idle'})))
 
 // 监听MQTT事件
 // @event connect
@@ -60,8 +41,8 @@ client.on('connect', () => {
   // 注册监听事件
   //
 
-  setActions.forEach( action => client.subscribe(`${prefix}${action}`));
-  getActions.forEach( action => client.subscribe(`${prefix}${action}`));
+  setActions.forEach( action => client.subscribe(`${prefix}/set${action}`));
+  getActions.forEach( action => client.subscribe(`${prefix}/get${action}`));
 
 });
 
@@ -93,7 +74,8 @@ client.on('message', (topic,msg) => {
         //
       case 'stop':
         musicPlayer.stop();
-        status = "idle"
+        status = 'idle';
+        client.publish(`/local/music/pub/status`, JSON.stringify({status:'idle'}))
         console.log('music stop');
         break;
         //
@@ -104,19 +86,20 @@ client.on('message', (topic,msg) => {
         if(params.playMode[0] == 'single'){
           var msg =  msg ? JSON.parse(msg.toString()) : null;
           musicPlayer.openFile(msg.file);
+          status = 'playing';
           // 广播播放器的状态
-          client.publish(`${publishPrefix.music}/get${publishAction.music.status}`, JSON.stringify({status:'idle'}))
+          client.publish(`/local/music/pub/status`, JSON.stringify({status:'playing'}))
           break;
         }
         // 播放播放列表
         if(params.playMode[0] == 'playlist'){
           var msg =  msg ? JSON.parse(msg.toString()) : null;
           musicPlayer.openPlaylist(msg.file);
+          status = 'playing';
           // 广播播放器的状态
-          client.publish(`${publishPrefix.music}/get${publishAction.music.status}`, JSON.stringify({status:'idle'}))
+          client.publish(`/local/music/pub/status`, JSON.stringify({status:'playing'}))
           break;
         }
-        status = "playing";
         console.log('music play');
         break;
       default:
@@ -129,15 +112,12 @@ client.on('message', (topic,msg) => {
   //
   else if(params && params.method == 'get'){
     console.log("get",params);
-    switch (params.action) {
-      case 'palylist':
-        client.publish('/local/storage/playlist/list')
-        break;
-      case 'library':
-      default:
-        client.publish('/local/storage/music/list');
-        break;
+
+    if(params.action == 'status'){
+      client.publish(`/local/music/pub/status`, JSON.stringify({status:status}))
+      return 0;
     }
+
   }
 
 

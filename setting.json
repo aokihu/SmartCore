@@ -9,12 +9,13 @@
     "music_path":"music"
   },
   "data":{
-    "schedule_file":"/../data/schedule.json",
-    "music_file":"/../data/music.json",
-    "playlist_file":"/../data/playlist.json"
+    "schedule_file":"/data/schedule.json",
+    "database":"/data/database.json",
+    "music_file":"/data/music.json",
+    "playlist_file":"/data/playlist.json"
   },
   "watch":{
-    "music":"/../library"
+    "music":"/library"
   },
   "software":{
     "version":"1.0.0"

@@ -1,0 +1,19 @@
+{
+  "music": [
+    {
+      "filename": "test2.mp3",
+      "path": "/Users/aokihu/Projects/SmartCore/SmartCore/library",
+      "_id": "8466d33d283709d77b5d8e06ee2c41ac223d0a8a"
+    },
+    {
+      "filename": "p.m3u",
+      "path": "/Users/aokihu/Projects/SmartCore/SmartCore/library",
+      "_id": "87732ce896967ec14da81b850948c92e3ab7affe"
+    },
+    {
+      "filename": "大电影.mp3",
+      "path": "/Users/aokihu/Projects/SmartCore/SmartCore/library",
+      "_id": "950080c407d7c74ec6d6c81a7d0e5efe9b588b4f"
+    }
+  ]
+}

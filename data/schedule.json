@@ -22,11 +22,11 @@
   {
     "id":443,
     "dw":[1,2,3,4,5,6,7],
-    "h":17,
-    "m":28,
+    "h":20,
+    "m":0,
     "s":0,
-    "action":"play playlist",
-    "data":"/Users/aokihu/Projects/SmartCore/p.m3u",
+    "action":"play music",
+    "data":"/Users/aokihu/Projects/SmartCore/SmartCore/library/test2.mp3",
     "comment":""
   }
 ]
