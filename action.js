@@ -31,6 +31,8 @@ exports.music = {
   }
 }
 
+
+// 计时器
 exports.timer = {
   'prefix':'/local/timer',
   'get':{
@@ -46,6 +48,7 @@ exports.timer = {
   }
 }
 
+// 数据库
 exports.db = {
   'prefix':'/local/db',
   'get':{
@@ -60,6 +63,23 @@ exports.db = {
   'pub':{
     'list':'/list',
     'get':'/list'
+  }
+}
+
+// 设备信息
+exports.machine = {
+  'prefix':'/machine',
+  'get':{
+    'info':'/info',     // 获取主机信息
+    'status':'/status'  // 获取主机状态
+  },
+  'set':{
+    'clock':'/clock'    // 设置主机时间
+  },
+  'pub':{
+    'info':'/info',      // 发布主机信息
+    'status':'/status',  // 发布主机状态
+    'clock':'/clock'    // 发布主机时间
   }
 }
 

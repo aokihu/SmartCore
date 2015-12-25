@@ -8,6 +8,7 @@ const Setting = require('../setting.json');
 const fs = require('fs');
 const StringDecoder = require('string_decoder').StringDecoder;
 const mqtt = require('mqtt');
+const mmd = require('musicmetadata');
 const action = require('../action.js');
 
 // 字符解码器
@@ -34,9 +35,10 @@ fs.watch(MusicLibrary, (evt, filename) => {
   }
 
   var action; // 动作
+  let musicFile = `${MusicLibrary}/${realFilename}`; // 音乐绝对路径
 
   // 判断文件是添加还是删除
-  fs.stat(`${MusicLibrary}/${realFilename}`, (err, state)=>{
+  fs.stat(musicFile, (err, state)=>{
 
     //
     // Add File
@@ -54,9 +56,11 @@ fs.watch(MusicLibrary, (evt, filename) => {
       // 如果没有发生错误，那么就是添加或者修改文件，一般对媒体文件只是添加动作
       //
 
-      console.log(`add file ${realFilename}`);
+      console.log(`add file ${musicFile}`);
       action = '/local/db/add/music';
+
       client.publish(action, JSON.stringify(fileData));
+
     }
     else {
       return false;

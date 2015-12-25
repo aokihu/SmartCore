@@ -52,9 +52,9 @@ client.on('message', (topic, msg) =>{
   let _topic = topic.toString();
 
   switch (_topic){
-    case 'get/local/timer/schedule':
+    case '/local/timer/get/schedule':
     default:
-      client.publish('/local/timer/schedule', JSON.stringify(timer.schedule));
+      client.publish('/local/timer/pub/schedule', JSON.stringify(timer.schedule));
     break;
   }
 });
