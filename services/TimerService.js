@@ -10,10 +10,11 @@
  * }
  */
 
-var mqtt = require('mqtt'),
-    Timer = require('../modules/Timer.js'),
-    Setting = require('../setting.json'),
-    action = require('../action.js')
+const mqtt = require('mqtt')
+const mqtt_regex = require('mqtt_regex')
+const Timer = require('../modules/Timer.js')
+const Setting = require('../setting.json')
+const action = require('../action.js')
 
 var client = mqtt.connect(Setting[Setting.Mode].mqtt_server);
 
