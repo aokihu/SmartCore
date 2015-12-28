@@ -10,10 +10,8 @@ class Timer extends events.EventEmitter{
 
   constructor(){
     super();
-
     this.timers = [];
     this.schedule = [];
-
   }
 
   /**
@@ -27,7 +25,6 @@ class Timer extends events.EventEmitter{
     try{
 
       let rawData = fs.readFileSync(this.dataFile, 'utf8');
-
       this.schedule = JSON.parse(rawData);
 
     }
@@ -60,7 +57,18 @@ class Timer extends events.EventEmitter{
 
       this.timers.push(t);
 
-    })
+    });
+
+    console.log('timer start');
+  }
+
+  /**
+   * 重新启动计时器
+   */
+  restart(){
+    this.stop();
+    this.start();
+    console.log('timer restarted');
   }
 
   /**
@@ -71,6 +79,8 @@ class Timer extends events.EventEmitter{
     this.timers.forEach(timer => {
       timer.clear();
     })
+
+    console.log('timer stop');
 
   }
 
@@ -98,18 +108,33 @@ class Timer extends events.EventEmitter{
   }
 
   /**
+   * 更新任务
+   * @param  {[type]} task [description]
+   * @return {[type]}      [description]
+   */
+  update(task){
+    let pos = _.findIndex(this.schedule, 'id', task.id);
+
+    if(pos > -1){
+      this.schedule[pos] = task;
+      return true;
+    }
+  }
+
+  /**
    * 移除一个定时任务
    * @param  {UUID} taskId [description]
    * @return {[type]}        [description]
    */
   remove(taskId){
 
-    let pos = this.schedule.findeIndex((task) => {
-      return task.id === taskID
-    });
+    let pos = _.findIndex(this.schedule, (item) => {return taskId == item.id});
+    console.log(pos);
 
     if(pos > -1){
       this.schedule.splice(pos, 1);
+      console.log('remove task id:',taskId);
+      return true;
     }
 
   }

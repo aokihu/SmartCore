@@ -5,7 +5,7 @@
   "main": "maina.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node --harmony_modules --harmony_regexps --harmony_sloppy_function --harmony_sloppy_let --harmony_unicode_regexps --harmony_destructuring --harmony_reflect --harmony_default_parameters --harmony_sharedarraybuffer --harmony_atomics  --harmony_proxies main.js"
+    "start": "node main.js"
   },
   "repository": {
     "type": "git",

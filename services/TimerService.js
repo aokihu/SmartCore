@@ -11,7 +11,7 @@
  */
 
 const mqtt = require('mqtt')
-const mqtt_regex = require('mqtt_regex')
+const mqtt_regex = require('mqtt-regex')
 const Timer = require('../modules/Timer.js')
 const Setting = require('../setting.json')
 const action = require('../action.js')
@@ -21,10 +21,13 @@ var client = mqtt.connect(Setting[Setting.Mode].mqtt_server);
 const setActions = action.flat(action.timer.set);
 const getActions = action.flat(action.timer.get);
 
+const info = mqtt_regex(`${action.timer.prefix}/+method/+append`).exec;
+
 /* 计时器配置 */
 var timer = new Timer();
 timer.load(process.cwd()+Setting.data.schedule_file);
 timer.start();
+setInterval( () => {timer.save()}, 1000 * 3600);
 
 timer.on('timeout', function(evt){
 
@@ -49,13 +52,44 @@ client.on('connect', ()=>{
 
 });
 
-client.on('message', (topic, msg) =>{
-  let _topic = topic.toString();
+client.on('message', (topic, msg) => {
 
-  switch (_topic){
-    case '/local/timer/get/schedule':
-    default:
+  let _topic = topic.toString();
+  let _msg  = msg ? msg.toString() : '{}';
+  let params = info(_topic);
+
+  if(params && params.method == 'get'){
+
+    if(params.append == 'schedule'){
       client.publish('/local/timer/pub/schedule', JSON.stringify(timer.schedule));
-    break;
+    }
+
   }
+
+
+  if(params && params.method == 'set'){
+
+    let subMethod = params.append;
+    let _data = JSON.parse(JSON.parse(msg));
+    console.log(_data, typeof _data);
+
+    switch (subMethod) {
+      case 'remove':
+        if(timer.remove(_data.id)){
+          client.publish('/local/timer/pub/schedule', JSON.stringify(timer.schedule));
+          timer.restart();
+        }
+        break;
+
+      case 'update':
+        if(timer.update(_data)){
+          client.publish('/local/timer/pub/schedule', JSON.stringify(timer.schedule));
+          timer.restart();
+        }
+        break;
+      default:
+
+    }
+  }
+
 });

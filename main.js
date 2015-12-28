@@ -4,7 +4,7 @@
  * 负责启动各项服务
  */
 
-const {spawn} = require('child_process');
+const spawn = require('child_process').spawn;
 const fs = require('fs');
 const Console = console.Console;
 
