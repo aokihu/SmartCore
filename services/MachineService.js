@@ -1,6 +1,6 @@
 'use strict';
 const mqtt = require('mqtt');
-const Setting = require('../Setting.json');
+const Setting = require('../setting.json');
 const action = require('../action.js');
 
 //

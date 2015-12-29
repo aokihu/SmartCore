@@ -1,64 +1,14 @@
 {
   "music": [
     {
-      "filename": "1-05 情歌.mp3",
-      "path": "/Users/aokihu/Projects/SmartCore/SmartCore/library",
-      "_id": "42fbad6c665ddcfef3564b61c53e4d5b4ba0d2e1"
+      "filename": "青青河边草.mp3",
+      "path": "/Users/aokihu/Projects/SmartCore/library",
+      "_id": "ba2f27b1cf6c3deec9b1b6ca49ed4914ca47c872"
     },
     {
-      "filename": "难念的经.mp3",
-      "path": "/Users/aokihu/Projects/SmartCore/SmartCore/library",
-      "_id": "c712fa39aa318dc8875bec7cfab0981d3ac44f14"
-    },
-    {
-      "filename": "同桌的你(电影《同桌的妳》片尾主题曲).mp3",
-      "path": "/Users/aokihu/Projects/SmartCore/SmartCore/library",
-      "_id": "863e9ee967b481538dbe78582f807cd5b5039845"
-    },
-    {
-      "filename": "越爱越难过.mp3",
-      "path": "/Users/aokihu/Projects/SmartCore/SmartCore/library",
-      "_id": "0a4170530c1f0fb1026bc724ab6be100cbfe38a7"
-    },
-    {
-      "filename": "真英雄（电视剧《隋唐英雄》主题曲）.mp3",
-      "path": "/Users/aokihu/Projects/SmartCore/SmartCore/library",
-      "_id": "b3f3f090a6152e4abd6ba8a3fac6b1dec661047c"
-    },
-    {
-      "filename": "你的名字 我的姓氏.mp3",
-      "path": "/Users/aokihu/Projects/SmartCore/SmartCore/library",
-      "_id": "b180e633a89819e693af5e591669fbed2a8fc0ce"
-    },
-    {
-      "filename": "少年游.mp3",
-      "path": "/Users/aokihu/Projects/SmartCore/SmartCore/library",
-      "_id": "8c17fc2c29ff94c5ebf67fd4330d02b0636ea2f8"
-    },
-    {
-      "filename": "大海.mp3",
-      "path": "/Users/aokihu/Projects/SmartCore/SmartCore/library",
-      "_id": "5b2d579ade9526950db8f0565d5077be078d27f1"
-    },
-    {
-      "filename": "黑色幽默.mp3",
-      "path": "/Users/aokihu/Projects/SmartCore/SmartCore/library",
-      "_id": "b4eabec7a52ae1e947cbacf22eaa39546f051d79"
-    },
-    {
-      "filename": "你是我的眼.mp3",
-      "path": "/Users/aokihu/Projects/SmartCore/SmartCore/library",
-      "_id": "d70cb5832a3a40154efc59712ca2e3a47eaf9fa6"
-    },
-    {
-      "filename": "淘汰.mp3",
-      "path": "/Users/aokihu/Projects/SmartCore/SmartCore/library",
-      "_id": "5debc7324b498f09abfd8d2b56394b742b466156"
-    },
-    {
-      "filename": "空白格.mp3",
-      "path": "/Users/aokihu/Projects/SmartCore/SmartCore/library",
-      "_id": "419a1388961c677c39215e784811554adf268636"
+      "filename": "追梦人.mp3",
+      "path": "/Users/aokihu/Projects/SmartCore/library",
+      "_id": "a4ab7e53043e15993d59a68ae9eaaab998affdb6"
     }
   ]
 }
